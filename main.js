@@ -36,35 +36,85 @@ var BasesAudioPlayerPlugin = class extends import_obsidian.Plugin {
   }
   async onload() {
     console.log("Loading Bases Audio Player Plugin");
+    this.addStyles();
     this.app.workspace.onLayoutReady(() => {
       setTimeout(() => this.processAllCards(), 500);
       this.setupObserver();
     });
+  }
+  addStyles() {
+    const styleEl = document.createElement("style");
+    styleEl.id = "bases-audio-player-styles";
+    styleEl.textContent = `
+            /* Bases Audio Player Styles */
+            
+            /* Hover effect verbetering voor overlay button */
+            .bases-audio-overlay .bases-audio-play-button:hover {
+                opacity: 1 !important;
+                transform: scale(1.15) !important;
+            }
+            
+            /* Zorg dat de cover de overlay goed toont */
+            .bases-cards-cover {
+                position: relative;
+                overflow: visible;
+            }
+            
+            /* Optional: Semi-transparante achtergrond voor de hele cover bij hover */
+            .bases-card:hover .bases-audio-overlay {
+                background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, transparent 70%);
+            }
+            
+            /* Table view styling */
+            .bases-audio-inline {
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 8px !important;
+            }
+            
+            .bases-audio-inline .bases-audio-play-button {
+                width: 32px !important;
+                height: 32px !important;
+                font-size: 14px !important;
+                background: var(--interactive-accent) !important;
+                color: var(--text-on-accent) !important;
+            }
+            
+            .bases-audio-inline .bases-audio-play-button:hover {
+                opacity: 0.9 !important;
+                transform: scale(1.1) !important;
+            }
+        `;
+    document.head.appendChild(styleEl);
   }
   onunload() {
     console.log("Unloading Bases Audio Player Plugin");
     if (this.observer) {
       this.observer.disconnect();
     }
+    const styleEl = document.getElementById("bases-audio-player-styles");
+    if (styleEl) {
+      styleEl.remove();
+    }
   }
   setupObserver() {
     let timeout;
     this.observer = new MutationObserver((mutations) => {
-      var _a, _b;
-      let hasNewCards = false;
+      var _a, _b, _c, _d;
+      let hasNewContent = false;
       for (const mutation of mutations) {
         for (const node of Array.from(mutation.addedNodes)) {
           if (node instanceof HTMLElement) {
-            if (((_a = node.classList) == null ? void 0 : _a.contains("bases-cards-item")) || ((_b = node.querySelector) == null ? void 0 : _b.call(node, ".bases-cards-item"))) {
-              hasNewCards = true;
+            if (((_a = node.classList) == null ? void 0 : _a.contains("bases-cards-item")) || ((_b = node.querySelector) == null ? void 0 : _b.call(node, ".bases-cards-item")) || ((_c = node.classList) == null ? void 0 : _c.contains("bases-td")) || ((_d = node.querySelector) == null ? void 0 : _d.call(node, ".bases-td"))) {
+              hasNewContent = true;
               break;
             }
           }
         }
-        if (hasNewCards)
+        if (hasNewContent)
           break;
       }
-      if (!hasNewCards)
+      if (!hasNewContent)
         return;
       clearTimeout(timeout);
       timeout = setTimeout(() => {
@@ -131,13 +181,16 @@ var BasesAudioPlayerPlugin = class extends import_obsidian.Plugin {
         const overlay = this.createAudioOverlay(file, fileName);
         cover.appendChild(overlay);
       });
-      const tableCells = document.querySelectorAll(".bases-table-cell, .bases-td");
-      tableCells.forEach((cell) => {
-        const existingInline = cell.querySelector(".bases-audio-inline");
-        if (existingInline) {
-          existingInline.remove();
+      const musicTds = document.querySelectorAll('.bases-td[data-property="note.Music"]');
+      musicTds.forEach((td) => {
+        const existingPlayer = td.querySelector(".bases-audio-inline");
+        const audioLink = td.querySelector("div.metadata-link-inner.internal-link[data-href]");
+        if (existingPlayer && !audioLink) {
+          return;
         }
-        const audioLink = cell.querySelector("span.internal-link[data-href], div.metadata-link-inner.internal-link[data-href]");
+        if (existingPlayer && audioLink) {
+          existingPlayer.remove();
+        }
         if (!audioLink)
           return;
         const dataHref = audioLink.getAttribute("data-href");
@@ -156,11 +209,11 @@ var BasesAudioPlayerPlugin = class extends import_obsidian.Plugin {
         }
         if (!file)
           return;
-        const parent = audioLink.parentElement;
-        if (!parent)
+        const metadataLink = audioLink.closest(".metadata-link");
+        if (!metadataLink || !metadataLink.parentElement)
           return;
         const inline = this.createAudioInline(file, fileName);
-        parent.replaceChild(inline, audioLink);
+        metadataLink.parentElement.replaceChild(inline, metadataLink);
       });
     } finally {
       this.isProcessing = false;

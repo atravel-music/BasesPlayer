@@ -1,10 +1,10 @@
 {
     "id": "bases-audio-player",
     "name": "Bases Audio Player",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "minAppVersion": "0.15.0",
     "description": "Embed audio players directly in Obsidian Bases views for Music properties",
-    "author": "Custom Plugin",
-    "authorUrl": "",
+    "author": "Atravel-Music",
+    "authorUrl": "atravel-music.com",
     "isDesktopOnly": false
 }

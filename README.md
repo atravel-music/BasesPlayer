@@ -1,20 +1,65 @@
-# BasesPlayer
-A short and sweet audio player plugin for Obsidian Bases View
+# Bases Audio Player Plugin
 
-## Quickstart
+An Obsidian plugin that automatically adds audio players to Bases views for your Music properties.
 
-This plugin enables a play/pause button for Obsidian Bases Cards view, where audio links stored in frontmatter from notes can be played. 
+## ⚡ Quick Start
 
-It searches for: 
+### What you need:
+- Node.js installed on your computer
+- An Obsidian vault
+- Audio files (.mp3, .wav, .ogg, .m4a) in your vault
 
-- .mp3
-- .wav
-- .ogg
-- .m4a
+### Installation in 4 steps:
 
-### Set-up
+1. **Copy all files** to `.obsidian/plugins/bases-audio-player/` in your vault
 
-1. Add a **property** in your Note’s frontmatter named **Music**: (property type = text)
-2. Set a audiolink from a track in your vault: [[Track Name.mp3]] 
-3. Go to your base view and toggle this property **Music** to view it in your Cards overview. 
-4. Not showing? Force Reload or Reopen Obsidian. 
+2. **Open terminal** in that folder and run:
+   ```bash
+   npm install
+   npm run build
+   ```
+
+3. **Activate the plugin** in Obsidian:
+   - Settings → Community Plugins → Bases Audio Player (turn on)
+
+4. **Done!** Open a Bases view with a Music property and see the audio players appear
+
+## 📝 Usage
+
+Make sure your frontmatter looks like this:
+
+```yaml
+---
+Music: [[my-music.mp3]]
+---
+```
+
+Open a Bases view (table or card) and the audio link automatically becomes a player!
+
+## ❓ Problems?
+
+See `INSTALLATION.md` for detailed instructions and troubleshooting.
+
+## 🎵 Features
+
+- ✅ Works in table view
+- ✅ Works in card view  
+- ✅ Automatic detection of audio files
+- ✅ Supports .mp3, .wav, .ogg, .m4a
+- ✅ Shows filename below the player (table view)
+- ✅ Centered overlay on cover art (card view)
+- ✅ Beautiful outlined SVG play/pause icons
+- ✅ Automatic pause of other players when starting new one
+
+## 📦 Files
+
+- `main.ts` - Plugin code
+- `manifest.json` - Plugin metadata
+- `package.json` - Dependencies
+- `tsconfig.json` - TypeScript configuration
+- `esbuild.config.mjs` - Build configuration
+- `INSTALLATION.md` - Complete installation instructions
+
+---
+
+Made with ❤️ for Obsidian Bases users

@@ -1,0 +1,42 @@
+/* Bases Audio Player - Simplified CSS */
+
+/* De play button overlay is al gecentreerd door de plugin */
+/* Hier voegen we alleen extra styling toe */
+
+/* Hover effect verbetering voor overlay button */
+.bases-audio-overlay .bases-audio-play-button:hover {
+    opacity: 1 !important;
+    transform: scale(1.15) !important;
+}
+
+/* Zorg dat de cover de overlay goed toont */
+.bases-cards-cover {
+    position: relative;
+    overflow: visible;
+}
+
+/* Optional: Semi-transparante achtergrond voor de hele cover bij hover */
+.bases-card:hover .bases-audio-overlay {
+    background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, transparent 70%);
+}
+
+/* Table view styling */
+.bases-audio-inline {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.bases-audio-inline .bases-audio-play-button {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 14px !important;
+    background: var(--interactive-accent) !important;
+    color: var(--text-on-accent) !important;
+    margin: 4px;
+}
+
+.bases-audio-inline .bases-audio-play-button:hover {
+    opacity: 0.9 !important;
+    transform: scale(1.15) !important;
+}
