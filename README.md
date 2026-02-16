@@ -5,7 +5,6 @@ An Obsidian plugin that automatically adds audio players to Bases views for your
 ## ⚡ Quick Start
 
 ### What you need:
-- Node.js installed on your computer
 - An Obsidian vault
 - Audio files (.mp3, .wav, .ogg, .m4a) in your vault
 
@@ -13,16 +12,10 @@ An Obsidian plugin that automatically adds audio players to Bases views for your
 
 1. **Copy all files** to `.obsidian/plugins/bases-audio-player/` in your vault
 
-2. **Open terminal** in that folder and run:
-   ```bash
-   npm install
-   npm run build
-   ```
-
-3. **Activate the plugin** in Obsidian:
+2. **Activate the plugin** in Obsidian:
    - Settings → Community Plugins → Bases Audio Player (turn on)
 
-4. **Done!** Open a Bases view with a Music property and see the audio players appear
+3. **Done!** Open a Bases view with a Music property and see the audio players appear
 
 ## 📝 Usage
 
@@ -53,12 +46,10 @@ See `INSTALLATION.md` for detailed instructions and troubleshooting.
 
 ## 📦 Files
 
-- `main.ts` - Plugin code
+- `main.js` - Plugin code
 - `manifest.json` - Plugin metadata
-- `package.json` - Dependencies
-- `tsconfig.json` - TypeScript configuration
-- `esbuild.config.mjs` - Build configuration
 - `INSTALLATION.md` - Complete installation instructions
+- `styles.css` - stylesheet
 
 ---
 
