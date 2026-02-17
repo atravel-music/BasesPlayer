@@ -8,7 +8,7 @@ An Obsidian plugin that automatically adds audio players to Bases views for your
 - An Obsidian vault
 - Audio files (.mp3, .wav, .ogg, .m4a) in your vault
 
-### Installation in 4 steps:
+### Installation in 3 steps:
 
 1. **Copy all files** to `.obsidian/plugins/bases-audio-player/` in your vault
 
@@ -27,7 +27,9 @@ Music: [[my-music.mp3]]
 ---
 ```
 
+Make sure that the Properties Music is checked in Bases.
 Open a Bases view (table or card) and the audio link automatically becomes a player!
+For table view: Row height medium or higher is recomended. 
 
 ## 🎵 Features
 
